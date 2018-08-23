@@ -120,7 +120,7 @@ $(
       });
 
       it("content changes", function() {
-        expect(firstFeed).not.toBe(secondFeed);
+        expect(firstFeed === secondFeed).toBe(false);
       });
     });
   })()
