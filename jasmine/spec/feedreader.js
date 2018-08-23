@@ -105,6 +105,23 @@ $(
              * by the loadFeed function that the content actually changes.
              * Remember, loadFeed() is asynchronous.
              */
+      let firstFeed;
+      let secondFeed;
+
+      beforeEach(function(done) {
+        loadFeed(0, function() {
+          firstFeed = document.querySelector(".entry").innerText;
+        });
+
+        loadFeed(1, function() {
+          secondFeed = document.querySelector(".entry").innerText;
+          done();
+        });
+      });
+
+      it("content changes", function() {
+        expect(firstFeed === secondFeed).toBe(false);
+      });
     });
   })()
 );
