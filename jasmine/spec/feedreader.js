@@ -60,15 +60,14 @@ $(
     });
 
     describe("Initial Entries", () => {
-      const feed = document.querySelector(".feed");
-      const feedEntry = feed.children;
+      const feed = $(".feed .entry").children;
 
       beforeEach(done => {
         loadFeed(0, done);
       });
 
       it("completes loadFeed", () => {
-        expect(feedEntry.length > 0).toBe(true);
+        expect(feed.length > 0).toBe(true);
       });
     });
 
