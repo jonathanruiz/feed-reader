@@ -9,12 +9,12 @@
  * to ensure they don't run until the DOM is ready.
  */
 $(
-  (function() {
+  (() => {
     /* This is our first test suite - a test suite just contains
     * a related set of tests. This suite is all about the RSS
     * feeds definitions, the allFeeds variable in our application.
     */
-    describe("RSS Feeds", function() {
+    describe("RSS Feeds", () => {
       /* This is our first test - it tests to make sure that the
          * allFeeds variable has been defined and that it is not
          * empty. Experiment with this before you get started on
@@ -22,19 +22,19 @@ $(
          * allFeeds in app.js to be an empty array and refresh the
          * page?
          */
-      it("are defined", function() {
+      it("are defined", () => {
         expect(allFeeds).toBeDefined();
         expect(allFeeds.length).not.toBe(0);
       });
 
-      it("no empty urls", function() {
+      it("no empty urls", () => {
         for (let i = 0; i < allFeeds.length; i++) {
           expect(allFeeds[i].url).toBeDefined();
           expect(allFeeds[i].url).not.toBe(false);
         }
       });
 
-      it("no empty names", function() {
+      it("no empty names", () => {
         for (let i = 0; i < allFeeds.length; i++) {
           expect(allFeeds[i].name).toBeDefined();
           expect(allFeeds[i].name).not.toBe(false);
@@ -42,15 +42,15 @@ $(
       });
     });
 
-    describe("The menu", function() {
+    describe("The menu", () => {
       const body = document.querySelector("body");
       const menu = document.querySelector(".menu-icon-link");
 
-      it("menu hidden", function() {
+      it("menu hidden", () => {
         expect(body.classList.contains("menu-hidden")).toBe(true);
       });
 
-      it("menu changes", function() {
+      it("menu changes", () => {
         menu.click();
         expect(body.classList.contains("menu-hidden")).toBe(false);
 
@@ -59,35 +59,35 @@ $(
       });
     });
 
-    describe("Initial Entries", function() {
+    describe("Initial Entries", () => {
       const feed = document.querySelector(".feed");
       const feedEntry = feed.children;
 
-      beforeEach(function(done) {
+      beforeEach(done => {
         loadFeed(0, done);
       });
 
-      it("completes loadFeed", function() {
+      it("completes loadFeed", () => {
         expect(feedEntry.length > 0).toBe(true);
       });
     });
 
-    describe("New Feed Selection", function() {
+    describe("New Feed Selection", () => {
       let firstFeed;
       let secondFeed;
 
-      beforeEach(function(done) {
-        loadFeed(0, function() {
+      beforeEach(done => {
+        loadFeed(0, () => {
           firstFeed = document.querySelector(".entry").innerText;
-        });
 
-        loadFeed(1, function() {
-          secondFeed = document.querySelector(".entry").innerText;
-          done();
+          loadFeed(1, () => {
+            secondFeed = document.querySelector(".entry").innerText;
+            done();
+          });
         });
       });
 
-      it("content changes", function() {
+      it("content changes", () => {
         expect(firstFeed === secondFeed).toBe(false);
       });
     });
